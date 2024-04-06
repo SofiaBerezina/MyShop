@@ -1,0 +1,121 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+Your shopping cart
+{% endblock %}
+{% block content %}
+
+<!------ Include the above in your HEAD tag ---------->
+<style>
+    .col-xs-2 a img {
+    display: block;
+    width: 100px;
+    height: 70px !important;
+    margin: 10px; auto
+    }
+    .col-xs-6 btn btn-success btn-sm btn-block a {
+    font-color: white;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-15">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="text-right">
+                                    <a href="{% url 'shop:product_list' %}" class="btn btn-success btn-block"
+                                       role="button">
+                                        <span class="glyphicon glyphicon-share-alt"></span> Continue shopping</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <hr>
+                    {% for item in cart %}
+                    {% with product=item.product %}
+                    <div class="row">
+                        <div class="col-xs-2"><a href="{{ product.get_absolute_url }}">
+                            <img src="
+                                {% if product.image %}
+                                    {{ product.image.url }}
+                                {% else %}
+                                    {% static 'img/no_image.png' %}
+                                {% endif %}">
+                        </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <h4 class="product-name"><strong>{{ product.name }}</strong></h4><h4><small>Product
+                            description</small></h4>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="col-xs-6 text-right">
+                                <h6><strong>${{ item.price }} <span class="text-muted">x</span></strong></h6>
+                            </div>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control input-sm" value="{{ item.quantity }}">
+                            </div>
+                            <div class="col-xs-2">
+                                <button type="button" class="btn btn-link btn-xs">
+                                    <a href="{% url 'cart:cart_remove' product.id%}"><span
+                                            class="glyphicon glyphicon-trash"> </span></a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endwith %}
+                    {% endfor %}
+                    <hr>
+					<div class="row">
+						<div class="text-center">
+                            <div class="col-xs-3">
+                                <h5 class="text-left">Subtotal <strong>${{ cart.get_total_price }}</strong></h5>
+                            </div>
+							<div class="col-xs-6">
+								<h6 class="text-right">Added items?</h6>
+							</div>
+							<div class="col-xs-3">
+                                <a href="{% url 'cart:cart_detail' %}" class="btn btn-default btn-sm btn-block"
+                                   role="button">Update cart</a>
+							</div>
+						</div>
+					</div>
+                    <hr>
+                </div>
+                    <div class="row">
+                        <div class="text-center">
+                            {% if cart.coupon %}
+                            <div class="col-xs-3">
+                                <h5>"{{ cart.coupon.code }}" coupon
+                                        ({{ cart.coupon.discount }}% off): <strong>- ${{ cart.get_discount|floatformat:"2" }}</strong></h5>
+                            </div>
+                            {% endif %}
+                            <form class="text-center" action="{% url 'coupons:apply' %}" method="post">
+                                {{ coupon_apply_form }}
+                                <input type="submit" value="Apply">
+                                {% csrf_token %}
+                            </form>
+                        </div>
+                    </div>
+            <div class="panel-footer">
+                    <div class="row text-center">
+                        <div class="col-xs-9">
+                            <h4 class="text-right">Total <strong>${{ cart.get_total_price_after_discount|floatformat:"2" }}</strong></h4>
+                        </div>
+                        <div class="col-xs-3">
+                            <a href="{% url 'orders:order_create' %}" class="btn btn-success btn-block"
+                                   role="button">Checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
