@@ -1,121 +1,307 @@
-{% extends "shop/base.html" %}
+<!doctype html>
 {% load static %}
-{% block title %}
-Your shopping cart
-{% endblock %}
-{% block content %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'shop/css/vendor.css' %}"/>
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}"/>
 
-<!------ Include the above in your HEAD tag ---------->
-<style>
-    .col-xs-2 a img {
-    display: block;
-    width: 100px;
-    height: 70px !important;
-    margin: 10px; auto
-    }
-    .col-xs-6 btn btn-success btn-sm btn-block a {
-    font-color: white;
-    }
-</style>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-15">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="panel-title">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+    <title>Cart</title>
+  </head>
+  <body class="bg-light">
+
+
+    <!-- header -->
+<header class="header">
+      <div class="container">
+        <div class="row">
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <a href="/" class="navbar-brand order-1 order-lg-2"><img src="{% static 'shop/images/logo.svg' %}" alt="Logo"></a>
+
+            <div class="collapse navbar-collapse order-4 order-lg-1" id="navbarMenu">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown dropdown-sm dropdown-hover">
+                  <a class="nav-link dropdown-toggle" href="{% url 'cart:cart_detail' %}" id="navbarDropdown-1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cart
+                  </a>
+                </li>
+                <li class="nav-item dropdown dropdown-lg dropdown-hover">
+                  <a class="nav-link dropdown-toggle" href="{% url 'shop:product_list' %}" id="navbarDropdown-2" role="button"  aria-haspopup="true" aria-expanded="false">
+                    Catalogue
+                  </a>
+                </li>
+
+                <li class="nav-item dropdown-lg dropdown-hover">
+                  <a class="nav-link dropdown-toggle text-red" href="#!" id="navbarDropdown-3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sale
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown-3">
+                    <div class="container">
+                      <div class="row gutter-1">
+                        <div class="col-lg-6">
+                          <div class="card card-tile">
+                            <figure class="card-image equal equal-50">
+                              <span class="image" style="background-image: url(assets/images/demo/menu-sale-1.jpg)"></span>
+                            </figure>
+                            <div class="card-footer p-1">
+                              <div class="bg-white p-2">
+                                <div class="row align-items-center">
+                                  <div class="col">
+                                    <h4 class="fs-20"><a href="#">50% Sale on Cardigans</a></h4>
+                                  </div>
+                                  <div class="col text-right">
+                                    <a href="" class="underline">Shop Now</a>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <div class="col-xs-6">
-                                <div class="text-right">
-                                    <a href="{% url 'shop:product_list' %}" class="btn btn-success btn-block"
-                                       role="button">
-                                        <span class="glyphicon glyphicon-share-alt"></span> Continue shopping</a></div>
-                            </div>
+                          </div>
                         </div>
+                        <div class="col-lg-6">
+                          <div class="card card-tile">
+                            <figure class="card-image equal equal-50">
+                              <span class="image" style="background-image: url(assets/images/demo/menu-sale-2.jpg)"></span>
+                            </figure>
+                            <div class="card-footer p-1">
+                              <div class="bg-white p-2">
+                                <div class="row align-items-center">
+                                  <div class="col">
+                                    <h4 class="fs-20"><a href="#">20% Sale on Jewelery</a></h4>
+                                  </div>
+                                  <div class="col text-right">
+                                    <a href="" class="underline">Shop Now</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                </div>
-                <div class="panel-body">
-                    <hr>
-                    {% for item in cart %}
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="collapse navbar-collapse order-5 order-lg-3" id="navbarMenu2">
+              <ul class="navbar-nav ml-auto position-relative">
+
+                <!-- search -->
+                <li class="nav-item dropdown dropdown-md dropdown-hover">
+                  <a class="nav-icon dropdown-toggle" id="navbarDropdown-4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-search d-none d-lg-inline-block"></i>
+                    <span class="d-inline-block d-lg-none">Search</span>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown-4">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="searchForm" placeholder="Search for items and brands">
+                    </div>
+                  </div>
+                </li>
+
+
+
+              </ul>
+            </div>
+
+            <div class="order-2 d-flex d-lg-none" id="navbarMenuMobile">
+              <ul class="navbar-nav navbar-nav--icons ml-auto position-relative">
+
+                <!-- search -->
+                <li class="nav-item">
+                  <a href="" class="nav-icon"><i class="icon-search"></i></a>
+                </li>
+
+
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- cart -->
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1>Shopping Cart</h1>
+          </div>
+        </div>
+
+        <div class="row gutter-3 gutter-lg-1">
+
+          <!-- content -->
+          <div class="col">
+            <div class="bg-white cart-item-list p-2 p-lg-3 mb-1">
+              {% for item in cart %}
                     {% with product=item.product %}
-                    <div class="row">
-                        <div class="col-xs-2"><a href="{{ product.get_absolute_url }}">
-                            <img src="
-                                {% if product.image %}
-                                    {{ product.image.url }}
-                                {% else %}
-                                    {% static 'img/no_image.png' %}
-                                {% endif %}">
-                        </a>
-                        </div>
-                        <div class="col-xs-4">
-                            <h4 class="product-name"><strong>{{ product.name }}</strong></h4><h4><small>Product
-                            description</small></h4>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="col-xs-6 text-right">
-                                <h6><strong>${{ item.price }} <span class="text-muted">x</span></strong></h6>
+                    {% if product %}
+                  <div class="cart-item">
+                    <a href="{{ product.get_absolute_url }}" class="cart-item-image"><img src="{{ product.image.url }}" alt="Image"></a>
+                    <div class="cart-item-body">
+                      <div class="row">
+                        <div class="col-10">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <h5 class="cart-item-title">{{ product.name }}</h5>
+                              <small class="cart-item-subtitle">Fred Perry</small>
+                              <ul class="cart-item-meta">
+                                <li>${{ item.price }}</li>
+                              </ul>
                             </div>
-                            <div class="col-xs-4">
-                                <input type="text" class="form-control input-sm" value="{{ item.quantity }}">
+                            <div class="col-md-6">
+                              <ul class="list list--horizontal">
+                                <li class="mr-2">
+                                  <div class="dropdown">
+                                    <a class="dropdown-toggle" href="#!" role="button" id="dropdown-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Size <span>M</span>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown-1">
+                                      <a class="dropdown-item" href="{% url 'cart:cart_detail' %}">S</a>
+                                      <a class="dropdown-item active">M</a>
+                                      <a class="dropdown-item" href="{% url 'cart:cart_detail' %}">L</a>
+                                      <a class="dropdown-item" href="{% url 'cart:cart_detail' %}">XL</a>
+                                    </div>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="dropdown">
+                                    <a class="dropdown-toggle" href="{% url 'cart:cart_detail' %}" role="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      QTY <span>{{ item.quantity }}"</span>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown-2">
+                                      <a class="dropdown-item active" href="{% url 'cart:cart_detail' %}">1</a>
+                                      <a class="dropdown-item" href="{% url 'cart:cart_detail' %}">2</a>
+                                      <a class="dropdown-item" href="{% url 'cart:cart_detail' %}">3</a>
+                                      <a class="dropdown-item" href="{% url 'cart:cart_detail' %}">4</a>
+                                      <a class="dropdown-item" href="{% url 'cart:cart_detail' %}">5</a>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
                             </div>
-                            <div class="col-xs-2">
-                                <button type="button" class="btn btn-link btn-xs">
-                                    <a href="{% url 'cart:cart_remove' product.id%}"><span
-                                            class="glyphicon glyphicon-trash"> </span></a>
-                                </button>
-                            </div>
+                          </div>
                         </div>
+                        <div class="col-2 text-right">
+                          <ul class="cart-item-options">
+                            <li><a href="{% if product.id %}{% url 'cart:cart_remove' product.id %}{% endif %}" class="icon-x"></a></li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
-                    {% endwith %}
-                    {% endfor %}
-                    <hr>
-					<div class="row">
-						<div class="text-center">
-                            <div class="col-xs-3">
-                                <h5 class="text-left">Subtotal <strong>${{ cart.get_total_price }}</strong></h5>
-                            </div>
-							<div class="col-xs-6">
-								<h6 class="text-right">Added items?</h6>
-							</div>
-							<div class="col-xs-3">
-                                <a href="{% url 'cart:cart_detail' %}" class="btn btn-default btn-sm btn-block"
-                                   role="button">Update cart</a>
-							</div>
-						</div>
-					</div>
-                    <hr>
+                  </div>
+                  {% endif %}
+                  {% endwith %}
+                  {% endfor %}
                 </div>
-                    <div class="row">
-                        <div class="text-center">
-                            {% if cart.coupon %}
-                            <div class="col-xs-3">
-                                <h5>"{{ cart.coupon.code }}" coupon
-                                        ({{ cart.coupon.discount }}% off): <strong>- ${{ cart.get_discount|floatformat:"2" }}</strong></h5>
-                            </div>
-                            {% endif %}
-                            <form class="text-center" action="{% url 'coupons:apply' %}" method="post">
+
+            <a href="{% url 'shop:product_list' %}" class="underlined">Continue Shopping</a>
+          </div>
+
+
+          <!-- sidebar -->
+          <aside class="col-lg-4">
+            <div class="bg-white p-2 p-lg-3">
+              <h2 class="mb-3 text-uppercase fs-20">Order total</h2>
+              <div class="input-combined mb-2">
+                  <form class="text-center" action="{% url 'coupons:apply' %}" method="post">
                                 {{ coupon_apply_form }}
-                                <input type="submit" value="Apply">
+                                <input type="submit" value="Apply" class="btn btn-white"  aria-label="Promo code" >
                                 {% csrf_token %}
-                            </form>
+                  </form>
+              </div>
+              <ul class="list-group list-group-minimal mb-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Items
+                  <span>${{ cart.get_total_price }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Shipping
+                  <span>$0.00</span>
+                </li>
+                  {% if cart.coupon %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-red">
+                      Discount
+                      <span class="text-red">-${{ cart.get_discount|floatformat:"2" }}</span>
+                    </li>
+                  {% endif %}
+                <li class="list-group-item d-flex justify-content-between align-items-center text-uppercase font-weight-bold">
+                  Total to pay
+                  <span>${{ cart.get_total_price_after_discount|floatformat:"2" }}</span>
+                </li>
+              </ul>
+              <a href="{% url 'orders:order_create' %}" class="btn btn-primary btn-block">Checkout</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- footer -->
+    <footer class="bg-dark pb-0 text-white">
+        <div class="container">
+            <div class="row justify-content-md-between gutter-2">
+
+                <!-- menu -->
+                <div class="order-1 col-md-8 col-lg-4">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="eyebrow mb-1">Company</h4>
+                            <ul class="menu-list">
+                                <li class="menu-list-item"><a href="" class="menu-list-link">Our story</a></li>
+                                <li class="menu-list-item"><a href="" class="menu-list-link">Careers</a></li>
+                                <li class="menu-list-item"><a href="" class="menu-list-link">Press</a></li>
+                                <li class="menu-list-item"><a href="" class="menu-list-link">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <h4 class="eyebrow mb-1">Help Center</h4>
+                            <ul class="menu-list">
+                                <li class="menu-list-item"><a href="" class="menu-list-link">Shipping</a></li>
+                                <li class="menu-list-item"><a href="" class="menu-list-link">Returns</a></li>
+                                <li class="menu-list-item"><a href="" class="menu-list-link">Payment</a></li>
+                                <li class="menu-list-item"><a href="" class="menu-list-link">FAQ</a></li>
+                            </ul>
                         </div>
                     </div>
-            <div class="panel-footer">
-                    <div class="row text-center">
-                        <div class="col-xs-9">
-                            <h4 class="text-right">Total <strong>${{ cart.get_total_price_after_discount|floatformat:"2" }}</strong></h4>
-                        </div>
-                        <div class="col-xs-3">
-                            <a href="{% url 'orders:order_create' %}" class="btn btn-success btn-block"
-                                   role="button">Checkout</a>
-                        </div>
+                </div>
+
+                <!-- subscribe -->
+
+
+                <!-- settings -->
+                <div class="order-3 order-md-2 order-lg-3 col-md-4 col-lg-3">
+                    <h4 class="eyebrow mb-1">Region & Currency</h4>
+                    <div class="select-frame mb-2">
+                        <select class="custom-select custom-select-lg mb-2" id="countrySelect2">
+                            <option value="1">United States</option>
+                            <option value="2">Germany</option>
+                            <option value="3">France</option>
+                        </select>
                     </div>
+                    <div class="select-frame">
+                        <select class="custom-select custom-select-lg" id="curencySelect2">
+                            <option value="1">USD</option>
+                            <option value="2">EUR</option>
+                            <option value="3">RUB</option>
+                        </select>
+                    </div>
+                    <ul class="list list--horizontal mt-2">
+                        <li><img src="{% static 'shop/images/demo/visa-1.svg' %}" class="payment" alt="Image"></li>
+                        <li><img src="{% static 'shop/images/demo/master-card-1.svg' %}" class="payment" alt="Image"></li>
+                        <li><img src="{% static 'shop/images/demo/amex-1.svg' %}" class="payment" alt="Image"></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-{% endblock %}
+    </footer>
+
+
+<script src="{% static 'shop/js/vendor.min.js' %}"></script>
+<script src="{% static 'shop/js/app.js' %}"></script>
+  </body>
+</html>

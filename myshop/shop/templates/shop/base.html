@@ -1,6 +1,5 @@
-
 <!doctype html>
-{% load staticfiles %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -17,8 +16,7 @@
         <div class="container">
             <div class="row">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand order-1 order-lg-2" href="/"><img src="{% static 'shop/images/logo.svg' %}"
-                                                                    alt="Logo"></a>
+                    <a class="navbar-brand order-1 order-lg-2" href="/main"><img src="{% static 'shop/images/logo.svg' %}" alt="Logo"></a>
 
                     <div class="collapse navbar-collapse order-4 order-lg-1" id="navbarMenu">
                         <ul class="navbar-nav mr-auto">
@@ -33,24 +31,6 @@
                                     aria-haspopup="true" aria-expanded="false">
                                     Catalogue
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown-2">
-                                    <div class="container">
-                                        <div class="row gutter-2">
-                                            <div class="col-mx-4">
-                                                <span class="eyebrow text-muted mb-1">Shop</span>
-                                                <ul class="menu-list">
-                                                    {% for c in categories %}
-                                                        <li class="menu-list-item" {% if category.slug == c.slug %}class="selected"{% endif %}>
-                                                            <a class="menu-list-link" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-                                                        </li>
-                                                  {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
                             </li>
 
                             <li class="nav-item dropdown-lg dropdown-hover">
@@ -450,10 +430,8 @@
                 </div>
             </div>
         </div>
-
-
     </footer>
-    <script src="{% static 'shop/js/vendor.min.js' %}"></script>
-    <script src="{% static 'shop/js/app.js' %}"></script>
+<script src="{% static 'shop/js/vendor.min.js' %}"></script>
+<script src="{% static 'shop/js/app.js' %}"></script>
 </body>
 </html>

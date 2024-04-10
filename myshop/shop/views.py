@@ -3,6 +3,10 @@ from .models import Category, Product
 from cart.forms import CartAddProductForm
 
 
+def main(request):
+    return render(request, 'shop/base.html')
+
+
 def product_detail(request, id, slug):
     product = get_object_or_404(Product,
                                 id=id,
@@ -25,5 +29,3 @@ def product_list(request, category_slug=None):
                   {'category': category,
                    'categories': categories,
                    'products': products})
-
-
