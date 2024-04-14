@@ -40,7 +40,7 @@
                         <div class="col-lg-6">
                           <div class="card card-tile">
                             <figure class="card-image equal equal-50">
-                              <span class="image" style="background-image: url(assets/images/demo/menu-sale-1.jpg)"></span>
+                              <span class="image" style="background-image: url(static/shop/images/demo/menu-sale-1.jpg)"></span>
                             </figure>
                             <div class="card-footer p-1">
                               <div class="bg-white p-2">
@@ -59,7 +59,7 @@
                         <div class="col-lg-6">
                           <div class="card card-tile">
                             <figure class="card-image equal equal-50">
-                              <span class="image" style="background-image: url(assets/images/demo/menu-sale-2.jpg)"></span>
+                              <span class="image" style="background-image: url(static/shop/images/demo/menu-sale-2.jpg)"></span>
                             </figure>
                             <div class="card-footer p-1">
                               <div class="bg-white p-2">
@@ -158,32 +158,12 @@
 
             <div class="row gutter-2">
               <div class="col-12">
-                <div class="form-group">
-                  <label>Size</label>
-                  <div class="btn-group-toggle btn-group-square" data-toggle="buttons">
-                    <label class="btn active">
-                      <input type="radio" name="customRadio" id="option-1"> xs
-                    </label>
-                    <label class="btn">
-                      <input type="radio" name="customRadio" id="option-2"> s
-                    </label>
-                    <label class="btn">
-                      <input type="radio" name="customRadio" id="option-3"> m
-                    </label>
-                    <label class="btn">
-                      <input type="radio" name="customRadio" id="option-4"> l
-                    </label>
-                    <label class="btn">
-                      <input type="radio" name="customRadio" id="option-5"> xl
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
                 <form action="{% url 'cart:cart_add' product.id %}" method="post">
                                 {{ cart_product_form }}
                                 {% csrf_token %}
+                  <div><br></div>
                   <input type="submit" value="Add to cart" class="btn btn-block btn-primary">
+
                 </form>
               </div>
             </div>
@@ -210,18 +190,6 @@
                 </div>
               </div>
             </div>
-
-            <div class="form-group">
-              <label>Share this product</label>
-              <div>
-                <ul class="list list--horizontal">
-                  <li><a href="#!" class="text-hover-facebook"><i class="fs-28 icon-facebook-square-brands"></i></a></li>
-                  <li><a href="#!" class="text-hover-instagram"><i class="fs-28 icon-instagram-square-brands"></i></a></li>
-                  <li><a href="#!" class="text-hover-twitter"><i class="fs-28 icon-twitter-square-brands"></i></a></li>
-                  <li><a href="#!" class="text-hover-pinterest"><i class="fs-28 icon-pinterest-square-brands"></i></a></li>
-                </ul>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -229,86 +197,6 @@
     </section>
 
     <!-- related -->
-    <section class="no-overflow">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h2>Recently viewed</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="owl-carousel visible" data-items="[4,3,2,1]" data-margin="10" data-nav="true" data-loop="true">
-              <div class="card card-product">
-                <figure class="card-image">
-                  <a href="#!" class="action"><i class="icon-heart"></i></a>
-                  <a href="#!">
-                    <img src="assets/images/demo/product-1.jpg" alt="Image">
-                    <img src="assets/images/demo/product-1-2.jpg" alt="Image">
-                  </a>
-                </figure>
-                <a href="" class="card-body">
-                  <h3 class="card-title">Blouse</h3>
-                  <span class="price">$19.00</span>
-                </a>
-              </div>
-              <div class="card card-product">
-                <figure class="card-image">
-                  <a href="#!" class="action"><i class="icon-heart"></i></a>
-                  <a href="#!">
-                    <img src="assets/images/demo/product-2.jpg" alt="Image">
-                    <img src="assets/images/demo/product-2-2.jpg" alt="Image">
-                  </a>
-                </figure>
-                <a href="" class="card-body">
-                  <h3 class="card-title">Swimwear</h3>
-                  <span class="price">$49.00</span>
-                </a>
-              </div>
-              <div class="card card-product">
-                <figure class="card-image">
-                  <a href="#!" class="action"><i class="icon-heart"></i></a>
-                  <a href="#!">
-                    <img src="assets/images/demo/product-3.jpg" alt="Image">
-                    <img src="assets/images/demo/product-3-2.jpg" alt="Image">
-                  </a>
-                </figure>
-                <a href="" class="card-body">
-                  <h3 class="card-title">Skirt</h3>
-                  <span class="price">$29.00</span>
-                </a>
-              </div>
-              <div class="card card-product">
-                <figure class="card-image">
-                  <a href="#!" class="action"><i class="icon-heart"></i></a>
-                  <a href="#!">
-                    <img src="assets/images/demo/product-listing-1.jpg" alt="Image">
-                    <img src="assets/images/demo/product-listing-1-1.jpg" alt="Image">
-                  </a>
-                </figure>
-                <a href="" class="card-body">
-                  <h3 class="card-title">Burgundy Dress</h3>
-                  <span class="price">$69.00</span>
-                </a>
-              </div>
-              <div class="card card-product">
-                <figure class="card-image">
-                  <a href="#!" class="action"><i class="icon-heart"></i></a>
-                  <a href="#!">
-                    <img src="assets/images/demo/product-listing-2.jpg" alt="Image">
-                    <img src="assets/images/demo/product-listing-2-1.jpg" alt="Image">
-                  </a>
-                </figure>
-                <a href="" class="card-body">
-                  <h3 class="card-title">Cream Dress</h3>
-                  <span class="price">$69.00</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
 
     <!-- footer -->

@@ -34,7 +34,7 @@
                             </li>
 
                             <li class="nav-item dropdown-lg dropdown-hover">
-                                <a class="nav-link dropdown-toggle text-red" href="#!" id="navbarDropdown-3" role="button"
+                                <a class="nav-link dropdown-toggle text-red" href="{% url 'shop:product_list' %}" id="navbarDropdown-3" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Sale
                                 </a>
@@ -51,7 +51,7 @@
                                                         <div class="bg-white p-2">
                                                             <div class="row align-items-center">
                                                                 <div class="col">
-                                                                    <h4 class="fs-20"><a href="#">50% Sale on Cardigans</a>
+                                                                    <h4 class="fs-20"><a href="{% url 'shop:product_list' %}">50% Sale on Cardigans</a>
                                                                     </h4>
                                                                 </div>
                                                                 <div class="col text-right">
@@ -72,7 +72,7 @@
                                                         <div class="bg-white p-2">
                                                             <div class="row align-items-center">
                                                                 <div class="col">
-                                                                    <h4 class="fs-20"><a href="#">20% Sale on Jewelery</a>
+                                                                    <h4 class="fs-20"><a href="{% url 'shop:product_list' %}">20% Sale on Jewelery</a>
                                                                     </h4>
                                                                 </div>
                                                                 <div class="col text-right">
@@ -155,26 +155,7 @@
                 <div class="col-md-6">
                     <div class="card card-tile">
                         <figure class="card-image equal vh-50 vh-md-100">
-                    <span class="image image--scroll" style="background-image: url(static/shop/images/demo/index2-slide-2.jpg)"
-                          data--100-bottom-top="transform: translateY(0%);"
-                          data-top-bottom="transform: translateY(25%);"></span>
-                        </figure>
-                        <div class="card-footer text-white p-lg-5">
-                            <div class="row gutter-1">
-                                <div class="col-md-8">
-                                    <h2>Cotton Cardigans</h2>
-                                </div>
-                                <div class="col-md-4 text-md-right">
-                                    <a href="" class="btn btn-outline-white">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card card-tile">
-                        <figure class="card-image equal vh-50 vh-md-100">
-                    <span class="image image--scroll" style="background-image: url(static/shop/images/demo/index2-slide-1.jpg)"
+                    <span class="image image--scroll" style="background-image: url(static/shop/images/demo/index2-slide1.jpg)"
                           data--100-bottom-top="transform: translateY(0%);"
                           data-top-bottom="transform: translateY(25%);"></span>
                         </figure>
@@ -184,7 +165,26 @@
                                     <h2>Fancy Jewelery</h2>
                                 </div>
                                 <div class="col-md-4 text-md-right">
-                                    <a href="" class="btn btn-outline-white">Shop Now</a>
+                                    <a href="{% url 'shop:product_list' %}" class="btn btn-outline-white">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-tile">
+                        <figure class="card-image equal vh-50 vh-md-100">
+                    <span class="image image--scroll" style="background-image: url(static/shop/images/demo/index2-slide2.jpg)"
+                          data--100-bottom-top="transform: translateY(0%);"
+                          data-top-bottom="transform: translateY(25%);"></span>
+                        </figure>
+                        <div class="card-footer text-white p-lg-5">
+                            <div class="row gutter-1">
+                                <div class="col-md-8">
+                                    <h2>Нот Tops</h2>
+                                </div>
+                                <div class="col-md-4 text-md-right">
+                                    <a href="{% url 'shop:product_list' %}" class="btn btn-outline-white">Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -431,7 +431,7 @@
             </div>
         </div>
     </footer>
-<script src="{% static 'shop/js/vendor.min.js' %}"></script>
-<script src="{% static 'shop/js/app.js' %}"></script>
+    <script src="{% static 'shop/js/vendor.min.js' %}"></script>
+    <script src="{% static 'shop/js/app.js' %}"></script>
 </body>
 </html>

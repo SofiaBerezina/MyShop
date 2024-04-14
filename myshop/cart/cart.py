@@ -19,7 +19,7 @@ class Cart(object):
         # сохранение текущего примененного купона
         self.coupon_id = self.session.get('coupon_id')
 
-    def add(self, product, quantity=1, update_quantity=False):
+    def add(self, product, quantity=1, update_quantity=False, size='M'):
         """
         Добавить продукт в корзину или обновить его количество.
         """
@@ -27,12 +27,21 @@ class Cart(object):
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': 0,
                                      'price': str(product.price)}
+        if size:
+            self.cart[product_id]['size'] = size
         if update_quantity:
             self.cart[product_id]['quantity'] = quantity
         else:
             self.cart[product_id]['quantity'] += quantity
         self.save()
 
+    def update(self, product, size='M', quantity='1'):
+        product_id = str(product.id)
+        if size:
+            self.cart[product_id]['size'] = size
+        if quantity:
+            self.cart[product_id]['quantity'] = quantity
+        self.save()
     def save(self):
         # Обновление сессии cart
         self.session[settings.CART_SESSION_ID] = self.cart

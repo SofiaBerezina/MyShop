@@ -33,7 +33,7 @@ def order_create(request):
                                          price=item['price'],
                                          quantity=item['quantity'])
             # очистка корзины
-            cart.clear()
+
             # запуск асинхронной задачи
             order_created.delay(order.id)
             return render(request, 'orders/order/created.html',

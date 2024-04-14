@@ -15,7 +15,8 @@ def cart_add(request, product_id):
         cd = form.cleaned_data
         cart.add(product=product,
                  quantity=cd['quantity'],
-                 update_quantity=cd['update'])
+                 update_quantity=cd['update'],
+                 size=cd['size'])
     return redirect('cart:cart_detail')
 
 
@@ -37,3 +38,12 @@ def cart_detail(request):
                   'cart/detail.html',
                   {'cart': cart,
                    'coupon_apply_form': coupon_apply_form})
+
+
+def cart_clear(request):
+    cart = Cart(request)
+    request.session['coupon_id'] = None
+    cart.clear()
+    return redirect('cart:cart_detail')
+
+
