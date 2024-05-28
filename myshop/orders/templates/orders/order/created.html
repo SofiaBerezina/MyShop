@@ -1,9 +1,260 @@
-{% extends "shop/base.html" %}
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'shop/css/vendor.css' %}"/>
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}"/>
 
-{% block title %}Thank you{% endblock %}
+    <title>Order</title>
+  </head>
+  <body class="bg-light">
 
-{% block content %}
-    <h1>Thank you</h1>
-    <p>Your order has been successfully completed. Your order number is
-        <strong>{{ order.id }}</strong>.</p>
-{% endblock %}
+
+    <header class="header">
+    <div class="container">
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a href="/" class="navbar-brand order-1 order-lg-2"><img src="{% static 'shop/images/logo.svg' %}"
+                                                                         alt="Logo"></a>
+
+                <div class="collapse navbar-collapse order-4 order-lg-1" id="navbarMenu">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown dropdown-sm dropdown-hover">
+                            <a class="nav-link dropdown-toggle" href="{% url 'cart:cart_detail' %}"
+                               id="navbarDropdown-1" role="button"  aria-haspopup="true"
+                               aria-expanded="false">
+                                Cart
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown dropdown-lg dropdown-hover">
+                            <a class="nav-link dropdown-toggle" href="{% url 'shop:product_list' %}"
+                               id="navbarDropdown-2" role="button" aria-haspopup="true" aria-expanded="false">
+                                Catalogue
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown-lg dropdown-hover">
+                            <a class="nav-link dropdown-toggle text-red" href="#!" id="navbarDropdown-3" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Sale
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown-3">
+                                <div class="container">
+                                    <div class="row gutter-1">
+                                        <div class="col-lg-6">
+                                            <div class="card card-tile">
+                                                <figure class="card-image equal equal-50">
+                                                    <span class="image"
+                                                          style="background-image: url(/static/shop/images/demo/menu-sale-1.jpg)"></span>
+                                                </figure>
+                                                <div class="card-footer p-1">
+                                                    <div class="bg-white p-2">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <h4 class="fs-20"><a href="#">50% Sale on Cardigans</a>
+                                                                </h4>
+                                                            </div>
+                                                            <div class="col text-right">
+                                                                <a href="" class="underline">Shop Now</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="card card-tile">
+                                                <figure class="card-image equal equal-50">
+                                                    <span class="image"
+                                                          style="background-image: url(/static/shop/images/demo/menu-sale-2.jpg)"></span>
+                                                </figure>
+                                                <div class="card-footer p-1">
+                                                    <div class="bg-white p-2">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <h4 class="fs-20"><a href="#">20% Sale on Jewelery</a>
+                                                                </h4>
+                                                            </div>
+                                                            <div class="col text-right">
+                                                                <a href="" class="underline">Shop Now</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="collapse navbar-collapse order-5 order-lg-3" id="navbarMenu2">
+                    <ul class="navbar-nav ml-auto position-relative">
+
+                        <!-- search -->
+                        <li class="nav-item dropdown dropdown-md dropdown-hover">
+                            <a class="nav-icon dropdown-toggle" id="navbarDropdown-4" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="icon-search d-none d-lg-inline-block"></i>
+                                <span class="d-inline-block d-lg-none">Search</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown-4">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="searchForm"
+                                           placeholder="Search for items and brands">
+                                </div>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+                <div class="order-2 d-flex d-lg-none" id="navbarMenuMobile">
+                    <ul class="navbar-nav navbar-nav--icons ml-auto position-relative">
+
+                        <!-- search -->
+                        <li class="nav-item">
+                            <a href="" class="nav-icon"><i class="icon-search"></i></a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+
+    <!-- order -->
+    <section>
+      <div class="container">
+        <div class="bg-white p-3 mb-3">
+          <h1 class="text-uppercase fs-20 mb-3">Order Received</h1>
+          <div class="alert alert-success" role="alert">
+            Thank you. Your order has been received!
+          </div>
+          <div class="card card-data bordered mb-3">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h2 class="card-title fs-18">Order {{ order.id }}</h2>
+                </div>
+                <div class="col text-right">
+                  <span class="dropdown">
+                    <button class="btn btn-lg btn-white btn-ico" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button"><i class="icon-more-vertical"></i></button>
+                    <span class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#!">Action</a>
+                      <a class="dropdown-item" href="#!">Another action</a>
+                      <a class="dropdown-item" href="#!">Something else here</a>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <ul class="order-preview">
+                {% for item in cart %}
+                    {% with product=item.product %}
+                <li><a href="{{ product.get_absolute_url }}" title="{{ product.name }}" data-toggle="tooltip" data-placement="top"><img src="{{ product.image.url }}" alt="{{ product.name }}"></a></li>
+                {% endwith %}
+              {% endfor %}
+              </ul>
+            </div>
+            <div class="card-body">
+              <ul class="order-meta">
+                <li>
+                  <h5 class="order-meta-title">Order</h5>
+                  <span>{{ order.id }}</span>
+                </li>
+                <li>
+                  <h5 class="order-meta-title">Shipped Date</h5>
+                  <span>23 March 2019</span>
+                </li>
+                <li>
+                  <h5 class="order-meta-title">Total</h5>
+                  <span>${{ cart.get_total_price_after_discount|floatformat:"2" }}</span>
+                </li>
+                <li>
+                  <h5 class="order-meta-title">Status</h5>
+                  <span class="text-muted">Processing</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <p>Please check your inbox shortly, a confirmation email is on it's way</p>
+          <a href="{% url 'shop:product_list' %}" class="btn btn-primary">Continue Shopping</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- footer -->
+<footer class="bg-dark pb-0 text-white">
+    <div class="container">
+        <div class="row justify-content-md-between gutter-2">
+
+            <!-- menu -->
+            <div class="order-1 col-md-8 col-lg-4">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="eyebrow mb-1">Company</h4>
+                        <ul class="menu-list">
+                            <li class="menu-list-item"><a href="" class="menu-list-link">Our story</a></li>
+                            <li class="menu-list-item"><a href="" class="menu-list-link">Careers</a></li>
+                            <li class="menu-list-item"><a href="" class="menu-list-link">Press</a></li>
+                            <li class="menu-list-item"><a href="" class="menu-list-link">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4 class="eyebrow mb-1">Help Center</h4>
+                        <ul class="menu-list">
+                            <li class="menu-list-item"><a href="" class="menu-list-link">Shipping</a></li>
+                            <li class="menu-list-item"><a href="" class="menu-list-link">Returns</a></li>
+                            <li class="menu-list-item"><a href="" class="menu-list-link">Payment</a></li>
+                            <li class="menu-list-item"><a href="" class="menu-list-link">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- subscribe -->
+
+
+            <!-- settings -->
+            <div class="order-3 order-md-2 order-lg-3 col-md-4 col-lg-3">
+                <h4 class="eyebrow mb-1">Region & Currency</h4>
+                <div class="select-frame mb-2">
+                    <select class="custom-select custom-select-lg mb-2" id="countrySelect2">
+                        <option value="1">United States</option>
+                        <option value="2">Germany</option>
+                        <option value="3">France</option>
+                    </select>
+                </div>
+                <div class="select-frame">
+                    <select class="custom-select custom-select-lg" id="curencySelect2">
+                        <option value="1">USD</option>
+                        <option value="2">EUR</option>
+                        <option value="3">RUB</option>
+                    </select>
+                </div>
+                <ul class="list list--horizontal mt-2">
+                    <li><img src="{% static 'shop/images/demo/visa-1.svg' %}" class="payment" alt="Image"></li>
+                    <li><img src="{% static 'shop/images/demo/master-card-1.svg' %}" class="payment" alt="Image"></li>
+                    <li><img src="{% static 'shop/images/demo/amex-1.svg' %}" class="payment" alt="Image"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="{% static 'shop/js/vendor.min.js' %}"></script>
+<script src="{% static 'shop/js/app.js' %}"></script>
+  </body>
+</html>
